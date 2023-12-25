@@ -1,4 +1,6 @@
 <script lang="ts">
+  import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+
   const pins = 5
   const rows = 12
 
@@ -13,7 +15,7 @@
 
   let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
 
-  let rowScores = Array(pins).fill('')
+  let rowScores = Array(pins).fill(undefined)
 
   $: board.forEach((row, r) => {
     if (filled(row)) calculateScore(row, r)
@@ -39,6 +41,7 @@
       }
     }
     rowScores[r] = {correctPosition, correctColor}
+    if (correctPosition == pins) confetti()
   }
 </script>
 
@@ -69,7 +72,16 @@
     <div class="scores">
       {#each rowScores as score}
         <div class="row">
-          {JSON.stringify(score)}
+          {#if score}
+            {#each Array(score.correctPosition).fill(0) as _}
+              <div class="pin" style="color: black" title="One correct color and position">⬤</div>
+            {/each}
+            {#each Array(score.correctColor).fill(0) as _}
+              <div class="pin" style="color: white" title="One correct color, but wrong position">⬤</div>
+            {/each}
+          {:else}
+            <div class="pin"/>
+          {/if}
         </div>
       {/each}
     </div>
@@ -91,7 +103,7 @@
   .row {
     display: flex;
     flex-direction: row;
-    line-height: 3rem;
+    height: 3rem;
   }
 
   .pin {
