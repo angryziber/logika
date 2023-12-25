@@ -15,17 +15,14 @@
 
   let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
 
-  let rowScores = Array(pins).fill(undefined)
-
-  $: board.forEach((row, r) => {
-    if (filled(row)) calculateScore(row, r)
-  })
+  let rowScores = Array(rows).fill(undefined)
 
   function filled(row: string[]) {
     return row.every(p => p)
   }
 
-  function calculateScore(row: string[], r: number) {
+  function calculateScore(r: number) {
+    const row = board[r];
     let correctPosition = 0, correctColor = 0
     const tempSecret = [...secret]
     for (let i = 0; i < pins; i++) {
@@ -69,8 +66,11 @@
     </div>
 
     <div class="scores">
-      {#each rowScores as score}
+      {#each rowScores as score, r}
         <div class="row">
+          {#if filled(board[r]) && !rowScores[r]}
+            <button class="ready" on:click={() => calculateScore(r)}>✓</button>
+          {/if}
           {#if score}
             {#each Array(score.correctPosition).fill(0) as _}
               <div class="pin" style="color: black" title="One correct color and position">⬤</div>
@@ -123,5 +123,12 @@
   .scores .pin {
     border-color: transparent;
     font-size: 0.75rem;
+  }
+
+  button.ready {
+    background: #23ad23;
+    color: white;
+    font-size: 1.5rem;
+    line-height: 0.5;
   }
 </style>
