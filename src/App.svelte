@@ -88,13 +88,13 @@
           {/if}
           {#if score}
             {#each Array(score.correctPosition).fill(0) as _}
-              <div class="pin" style="color: black" title="One correct color and position">⬤</div>
+              <div class="score" style="color: black" title="One correct color and position">⬤</div>
             {/each}
             {#each Array(score.correctColor).fill(0) as _}
-              <div class="pin" style="color: white" title="One correct color, but wrong position">⬤</div>
+              <div class="score" style="color: white" title="One correct color, but wrong position">⬤</div>
             {/each}
           {:else}
-            <div class="pin"/>
+            <div class="score"/>
           {/if}
         </div>
       {/each}
@@ -106,6 +106,7 @@
   .game {
     display: flex;
     gap: 2rem;
+    user-select: none;
   }
 
   .board {
@@ -125,25 +126,33 @@
   }
 
   .pin {
-    border: 1px solid rgba(128, 128, 128, 0.35);
+    border: 1px solid #ccc;
     margin: -1px 0 0 -1px;
     width: 3rem;
     line-height: 3rem;
+  }
+
+  .pin:hover {
+    background: #cdcdcd;
     cursor: pointer;
   }
 
-  :not(.scores) .pin:hover {
-    background: rgba(128, 128, 128, 0.49);
-  }
-
   .pin.active {
+    background: #ccc;
     border-color: black;
+    position: relative;
+    z-index: 1;
   }
 
-  .scores .pin {
+  .scores {
+    width: calc(5 * 1.5rem);
+  }
+
+  .score {
     border-color: transparent;
     font-size: 0.75rem;
     width: 1.5rem;
+    line-height: 3rem;
   }
 
   button.ready {
