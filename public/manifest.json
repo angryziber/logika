@@ -1,0 +1,14 @@
+{
+  "name": "Logika board-game",
+  "short_name": "Logika",
+  "description": "Soviet-style board game Logika/Mastermind",
+  "icons": [
+    {
+      "src": "/logika/icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/logika/"
+}
