@@ -22,21 +22,23 @@
   }
 
   function calculateScore(r: number) {
-    const row = board[r];
+    const row = [...board[r]];
     let correctPosition = 0, correctColor = 0
     const tempSecret = [...secret]
-    for (let i = 0; i < pins; i++) {
-      if (row[i] == tempSecret[i]) {
+    secret.forEach((c, i) => {
+      if (row[i] == c) {
         correctPosition++
         tempSecret[i] = 'x'
-      } else {
-        const j = tempSecret.indexOf(row[i])
-        if (j >= 0) {
-          correctColor++
-          tempSecret[j] = 'x'
-        }
+        row[i] = 'y'
       }
-    }
+    })
+    row.forEach((c, i) => {
+      const j = tempSecret.indexOf(row[i])
+      if (j >= 0) {
+        correctColor++
+        tempSecret[j] = ''
+      }
+    })
     rowScores[r] = {correctPosition, correctColor}
     if (correctPosition == pins) confetti()
   }
