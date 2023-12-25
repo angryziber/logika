@@ -58,7 +58,6 @@
     </div>
 
     <div class="board">
-      {secret}
       {#each board as rows, r}
         <div class="row">
           {#each rows as p, i}
@@ -123,5 +122,6 @@
 
   .scores .pin {
     border-color: transparent;
+    font-size: 0.75rem;
   }
 </style>
