@@ -11,12 +11,39 @@
     board[r][i] = activeColor
   }
 
-  let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) + 1])
+  let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
+
+  let rowScores = Array(pins).fill('')
+
+  $: board.forEach((row, r) => {
+    if (filled(row)) calculateScore(row, r)
+  })
+
+  function filled(row: string[]) {
+    return row.every(p => p)
+  }
+
+  function calculateScore(row: string[], r: number) {
+    let correctPosition = 0, correctColor = 0
+    const tempSecret = [...secret]
+    for (let i = 0; i < pins; i++) {
+      if (row[i] == tempSecret[i]) {
+        correctPosition++
+        tempSecret[i] = 'x'
+      } else {
+        const j = tempSecret.indexOf(row[i])
+        if (j >= 0) {
+          correctColor++
+          tempSecret[j] = 'x'
+        }
+      }
+    }
+    rowScores[r] = {correctPosition, correctColor}
+  }
 </script>
 
 <main>
   <h1>Logika / Mastermind</h1>
-  {secret}
 
   <div class="game">
     <div class="pin-samples">
@@ -28,6 +55,7 @@
     </div>
 
     <div class="board">
+      {secret}
       {#each board as rows, r}
         <div class="row">
           {#each rows as p, i}
@@ -39,11 +67,9 @@
     </div>
 
     <div class="scores">
-      {#each Array(rows).fill(0) as r}
+      {#each rowScores as score}
         <div class="row">
-          {#each Array(pins).fill(0) as i}
-            <div class="pin">o</div>
-          {/each}
+          {JSON.stringify(score)}
         </div>
       {/each}
     </div>
@@ -65,6 +91,7 @@
   .row {
     display: flex;
     flex-direction: row;
+    line-height: 3rem;
   }
 
   .pin {
