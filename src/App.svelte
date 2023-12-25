@@ -9,14 +9,14 @@
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
 
-  function put(r: number, i: number) {
-    board[r][i] = activeColor
-  }
-
   let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
   let secretReveal = Array(pins).fill(false)
 
   let rowScores = Array(rows).fill(undefined)
+
+  function put(r: number, i: number) {
+    board[r][i] = activeColor
+  }
 
   function filled(row: string[]) {
     return row.every(p => p)
@@ -126,6 +126,7 @@
 
   .pin {
     border: 1px solid rgba(128, 128, 128, 0.35);
+    margin: -1px 0 0 -1px;
     width: 3rem;
     line-height: 3rem;
     cursor: pointer;
