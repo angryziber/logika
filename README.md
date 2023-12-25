@@ -1,5 +1,7 @@
 # Logika / Mastermind game
 
+[See it in action](https://keks.ee/logika/)
+
 An old Soviet board-game Logika (similar to international [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game))).
 
 Rules:
