@@ -14,6 +14,7 @@
   }
 
   let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
+  let secretReveal = Array(pins).fill(false)
 
   let rowScores = Array(rows).fill(undefined)
 
@@ -40,7 +41,10 @@
       }
     })
     rowScores[r] = {correctPosition, correctColor}
-    if (correctPosition == pins) confetti()
+    if (correctPosition == pins) {
+      confetti()
+      secretReveal = secretReveal.fill(true)
+    }
   }
 </script>
 
@@ -48,7 +52,7 @@
   <h1>Logika / Mastermind</h1>
 
   <div class="game">
-    <div class="pin-samples">
+    <div class="colors">
       {#each colors as color}
         <div class="pin" class:active={activeColor == color}
              style="color: {color}"
@@ -57,11 +61,20 @@
     </div>
 
     <div class="board">
+      <div class="row" style="margin-bottom: 2rem">
+        {#each secret as c, i}
+          <div class="pin" on:click={() => secretReveal[i] = !secretReveal[i]}
+               style="color: {secretReveal[i] ? c : ''}">
+            {secretReveal[i] ? '⬤' : '?'}
+          </div>
+        {/each}
+      </div>
+
       {#each board as rows, r}
         <div class="row">
-          {#each rows as p, i}
-            <div class="pin" style="color: {board[r][i]}"
-                 on:click={() => put(r, i)}>{p ? '⬤' : '\u00a0'}</div>
+          {#each rows as c, i}
+            <div class="pin" style="color: {c}"
+                 on:click={() => put(r, i)}>{c ? '⬤' : '\u00a0'}</div>
           {/each}
         </div>
       {/each}
@@ -101,6 +114,10 @@
     align-items: center;
   }
 
+  .colors, .scores {
+    padding-top: 5rem;
+  }
+
   .row {
     display: flex;
     flex-direction: row;
@@ -114,7 +131,7 @@
     cursor: pointer;
   }
 
-  .pin:hover {
+  :not(.scores) .pin:hover {
     background: rgba(128, 128, 128, 0.49);
   }
 
@@ -125,6 +142,7 @@
   .scores .pin {
     border-color: transparent;
     font-size: 0.75rem;
+    width: 1.5rem;
   }
 
   button.ready {
