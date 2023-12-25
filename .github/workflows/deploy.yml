@@ -8,8 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: npm i
+      - run: npm ci
       - run: npm run build
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: build
+          path: dist
