@@ -4,7 +4,7 @@
   const pins = 5
   const rows = 12
 
-  const colors = ['cyan', 'lightgreen', 'pink', 'red', 'white', 'black', 'yellow', 'orange']
+  const colors = ['black', 'white', 'deepskyblue', 'limegreen', '#8968e3', 'red', 'orange', 'yellow']
   let activeColor = ''
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
