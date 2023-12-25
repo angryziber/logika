@@ -15,7 +15,7 @@
   let rowScores = Array(rows).fill(undefined)
 
   function put(r: number, i: number) {
-    board[r][i] = activeColor
+    if (!rowScores[r]) board[r][i] = activeColor
   }
 
   function filled(row: string[]) {
