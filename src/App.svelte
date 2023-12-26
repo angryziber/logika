@@ -1,5 +1,5 @@
 <script lang="ts">
-  import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+  import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 
   const pins = 5
   const rows = 12
@@ -55,7 +55,7 @@
     <div class="board">
       <div class="row" style="margin-bottom: 2rem">
         {#each secret as c, i}
-          <div class="pin" on:click={() => secretReveal[i] = !secretReveal[i]}
+          <div class="pin" on:pointerdown={() => secretReveal[i] = !secretReveal[i]}
                style="color: {secretReveal[i] ? c : ''}">
             {secretReveal[i] ? '⬤' : '?'}
           </div>
@@ -68,7 +68,7 @@
             <div class="pin" style="color: {c}"
                  on:dragenter|preventDefault on:dragover|preventDefault
                  on:drop|stopPropagation={() => put(r, i)}
-                 on:mousedown={() => put(r, i)}
+                 on:pointerdown={() => put(r, i)}
             >{c ? '⬤' : '\u00a0'}</div>
           {/each}
         </div>
@@ -98,8 +98,7 @@
     {#each colors as color}
       <div class="pin" class:active={activeColor == color}
            style="color: {color}; cursor: move" draggable="true"
-           on:dragstart={() => activeColor = color}
-           on:mousedown={() => activeColor = color}
+           on:pointerdown={() => activeColor = color}
       >⬤</div>
     {/each}
   </div>
