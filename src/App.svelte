@@ -66,6 +66,8 @@
         <div class="row">
           {#each rows as c, i}
             <div class="pin" style="color: {c}"
+                 on:dragenter|preventDefault on:dragover|preventDefault
+                 on:drop|stopPropagation={() => put(r, i)}
                  on:click={() => put(r, i)}>{c ? '⬤' : '\u00a0'}</div>
           {/each}
         </div>
@@ -94,7 +96,8 @@
   <div class="colors">
     {#each colors as color}
       <div class="pin" class:active={activeColor == color}
-           style="color: {color}"
+           style="color: {color}; cursor: move" draggable="true"
+           on:dragstart={() => activeColor = color}
            on:click={() => activeColor = color}>⬤</div>
     {/each}
   </div>
