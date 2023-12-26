@@ -1,5 +1,6 @@
 <script lang="ts">
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
+  import Pin from './Pin.svelte'
 
   const pins = 5
   const rows = 12
@@ -55,21 +56,17 @@
     <div class="board">
       <div class="row" style="margin-bottom: 2rem">
         {#each secret as c, i}
-          <div class="pin" on:pointerdown={() => secretReveal[i] = !secretReveal[i]}
-               style="color: {secretReveal[i] ? c : ''}">
-            {secretReveal[i] ? '⬤' : '?'}
-          </div>
+          <Pin color={secretReveal[i] ? c : ''} symbol={secretReveal[i] ? '⬤' : '?'}
+               on:pointerdown={() => secretReveal[i] = !secretReveal[i]}/>
         {/each}
       </div>
 
       {#each board as rows, r}
         <div class="row">
-          {#each rows as c, i}
-            <div class="pin" style="color: {c}"
-                 on:dragenter|preventDefault on:dragover|preventDefault
-                 on:drop|stopPropagation={() => put(r, i)}
-                 on:pointerdown={() => put(r, i)}
-            >{c ? '⬤' : '\u00a0'}</div>
+          {#each rows as color, i}
+            <Pin {color} symbol={color ? '⬤' : '\u00a0'}
+                 on:drop={() => put(r, i)}
+                 on:pointerdown={() => put(r, i)}/>
           {/each}
         </div>
       {/each}
@@ -96,10 +93,7 @@
 
   <div class="colors">
     {#each colors as color}
-      <div class="pin" class:active={activeColor == color}
-           style="color: {color}; cursor: move" draggable="true"
-           on:pointerdown={() => activeColor = color}
-      >⬤</div>
+      <Pin {color} active={activeColor === color} on:pointerdown={() => activeColor = color} draggable/>
     {/each}
   </div>
 </main>
@@ -124,28 +118,6 @@
     display: flex;
     flex-direction: row;
     height: 3rem;
-  }
-
-  .pin {
-    user-select: none;
-    border: 1px solid #ccc;
-    margin: -1px 0 0 -1px;
-    width: 3rem;
-    line-height: 2.8rem;
-    padding-bottom: 0.2rem;
-    font-size: 1.5rem;
-  }
-
-  .pin:hover {
-    background: #cdcdcd;
-    cursor: pointer;
-  }
-
-  .pin.active {
-    background: #ccc;
-    border-color: black;
-    position: relative;
-    z-index: 1;
   }
 
   .scores {
