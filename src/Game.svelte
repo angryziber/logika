@@ -4,6 +4,7 @@
   import Score from './Score.svelte'
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
   import Secret from './Secret.svelte'
+  import Reset from './Reset.svelte'
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
   let secret: string[]
@@ -48,7 +49,7 @@
 
 <div class="game">
   <div class="board">
-    <div class="row" style="margin-bottom: 2rem">
+    <div class="row mb">
       <Secret bind:secret reveal={gameOver}/>
     </div>
 
@@ -61,17 +62,23 @@
     {/each}
   </div>
 
-  <div class="scores">
-    {#each rowScores as score, r}
-      <div class="row">
-        {#if filled(board[r]) && !rowScores[r]}
-          <button class="ready" on:click={() => calculateScore(r)}>✓</button>
-        {/if}
-        {#if score}
-          <Score {score}/>
-        {/if}
-      </div>
-    {/each}
+  <div>
+    <div class="row mb">
+      <Reset/>
+    </div>
+
+    <div class="scores">
+      {#each rowScores as score, r}
+        <div class="row">
+          {#if filled(board[r]) && !rowScores[r]}
+            <button class="ready" on:click={() => calculateScore(r)}>✓</button>
+          {/if}
+          {#if score}
+            <Score {score}/>
+          {/if}
+        </div>
+      {/each}
+    </div>
   </div>
 </div>
 
@@ -93,14 +100,14 @@
     align-items: center;
   }
 
-  .scores {
-    margin-top: 5rem;
-  }
-
   .row {
     display: flex;
     flex-direction: row;
     height: 3rem;
+  }
+
+  .row.mb {
+    margin-bottom: 2rem;
   }
 
   .scores {
