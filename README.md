@@ -11,3 +11,5 @@ Rules:
   * Black: some guessed color is at the correct position
   * White: some guessed color exists, but at different position
 * Repeat until you know the correct secret (5 blacks)!
+
+A basic example [Svelte](https://svelte.dev/).
