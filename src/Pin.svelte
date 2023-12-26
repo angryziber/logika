@@ -11,25 +11,24 @@
 </script>
 
 <div class="pin" class:active
-     style="color: {color}; {draggable ? 'cursor: move' : ''}" draggable={draggable}
+     style={draggable ? 'cursor: move' : ''} draggable={draggable}
      on:pointerdown={click}
-     on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault
->{color ? '⬤' : emptySymbol}</div>
+     on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault>
+  <div class="hole" class:filled={!!color} style="background: {color}">
+    {#if !color}{emptySymbol}{/if}
+  </div>
+</div>
 
 <style>
   .pin {
     user-select: none;
-    border: 1px solid #ccc;
-    margin: -1px 0 0 -1px;
+    height: 3rem;
     width: 3rem;
-    line-height: 2.8rem;
-    padding-bottom: 0.2rem;
-    font-size: 1.5rem;
+    position: relative;
   }
 
   .pin:hover {
     background: #cdcdcd;
-    cursor: pointer;
   }
 
   .pin.active {
@@ -37,5 +36,20 @@
     border-color: black;
     position: relative;
     z-index: 1;
+  }
+
+  .hole {
+    font-size: 1.5rem;
+    line-height: 1.4;
+    cursor: pointer;
+    position: absolute;
+    inset: 15%;
+    border: 1px solid gray;
+    border-radius: 50%;
+    box-shadow: inset 5px 5px 10px rgba(0,0,0,0.3);
+  }
+
+  .hole.filled {
+    box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3);
   }
 </style>
