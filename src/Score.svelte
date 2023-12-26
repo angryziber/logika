@@ -1,17 +1,16 @@
 <script lang="ts">
-  import type {ScoreType} from './config'
-
-  export let score: ScoreType
+  export let correctPosition: number
+  export let correctColor: number
 
   function showTitle(e: MouseEvent) {
     alert(e.currentTarget['title'])
   }
 </script>
 
-{#each Array(score.correctPosition).fill(0) as _}
+{#each Array(correctPosition).fill(0) as _}
   <div class="score" style="color: black" title="Blak: one correct color and position" on:click={showTitle}>⬤</div>
 {/each}
-{#each Array(score.correctColor).fill(0) as _}
+{#each Array(correctColor).fill(0) as _}
   <div class="score" style="color: white" title="White: one correct color, but wrong position" on:click={showTitle}>⬤</div>
 {/each}
 
