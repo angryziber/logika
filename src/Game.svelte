@@ -51,7 +51,7 @@
   <div class="board">
     <div class="row" style="margin-bottom: 2rem">
       {#each secret as c, i}
-        <Pin color={secretReveal[i] ? c : ''} symbol={secretReveal[i] ? '⬤' : '?'}
+        <Pin color={secretReveal[i] ? c : ''} emptySymbol="?"
              on:pointerdown={() => secretReveal[i] = !secretReveal[i]}/>
       {/each}
     </div>
@@ -59,7 +59,7 @@
     {#each board as rows, r}
       <div class="row">
         {#each rows as color, i}
-          <Pin {color} symbol={color ? '⬤' : '\u00a0'}
+          <Pin {color}
                on:drop={() => put(r, i)}
                on:pointerdown={() => put(r, i)}/>
         {/each}
