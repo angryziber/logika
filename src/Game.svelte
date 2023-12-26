@@ -12,10 +12,6 @@
   let activeColor = ''
   let gameOver = false
 
-  function put(r: number, i: number) {
-    board[r][i] = activeColor
-  }
-
   function won() {
     gameOver = true
     confetti()
@@ -28,10 +24,10 @@
       <Secret bind:secret reveal={gameOver}/>
     </div>
 
-    {#each board as rows, r}
+    {#each board as rows}
       <div class="row">
-        {#each rows as color, i}
-          <Pin {color} on:click={() => put(r, i)}/>
+        {#each rows as color}
+          <Pin {color} on:click={() => color = activeColor}/>
         {/each}
       </div>
     {/each}
