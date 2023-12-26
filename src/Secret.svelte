@@ -10,6 +10,6 @@
 </script>
 
 {#each secret as c, i}
-  <Pin color={secretReveal[i] ? c : ''} emptySymbol="?"
+  <Pin color={secretReveal[i] ? c : ''} emptySymbol="?" title="Reveal"
        on:click={() => secretReveal[i] = !secretReveal[i]}/>
 {/each}

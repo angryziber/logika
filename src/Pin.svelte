@@ -14,7 +14,8 @@
   <div class="inner" class:filled={!!color}
        style="background: {color}; {draggable ? 'cursor: move' : ''}"
        on:pointerdown={click} draggable={draggable}
-       on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault>
+       on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault
+       {...$$restProps}>
     {#if !color}{emptySymbol}{/if}
   </div>
 </div>

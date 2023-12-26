@@ -5,8 +5,8 @@
 
   export let row: string[]
   export let secret: string[]
+  export let calculated = false
 
-  let calculated = false
   let correctPosition = 0
   let correctColor = 0
 
@@ -54,7 +54,7 @@
     display: flex;
     place-items: center;
     gap: 0.5rem;
-    margin-left: 0.5rem;
+    margin: 0.5rem;
   }
 
   button {

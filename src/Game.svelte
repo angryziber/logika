@@ -8,6 +8,7 @@
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
+  let rowsCalculated: boolean[] = []
   let secret: string[]
   let activeColor = ''
   let gameOver = false
@@ -24,10 +25,10 @@
       <Secret bind:secret reveal={gameOver}/>
     </div>
 
-    {#each board as rows}
+    {#each board as rows, i}
       <div class="row">
         {#each rows as color}
-          <Pin {color} on:click={() => color = activeColor}/>
+          <Pin {color} on:click={() => {if (!rowsCalculated[i]) color = activeColor}}/>
         {/each}
       </div>
     {/each}
@@ -39,9 +40,9 @@
     </div>
 
     <div class="scores">
-      {#each board as row}
+      {#each board as row, i}
         <div class="row">
-          <ScoreCalculator {row} {secret} on:won={won}/>
+          <ScoreCalculator {row} {secret} bind:calculated={rowsCalculated[i]} on:won={won}/>
         </div>
       {/each}
     </div>
