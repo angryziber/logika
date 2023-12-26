@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {colors} from '../config'
+  import {colors} from './config'
   import Pin from './Pin.svelte'
 
   export let activeColor = ''

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {pins, rows} from '../config'
+  import {pins, rows} from './config'
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
   import Pin from './Pin.svelte'
   import Secret from './Secret.svelte'
