@@ -1,6 +1,6 @@
 <script lang="ts">
   import Score from './Score.svelte'
-  import {pins} from '../config'
+  import {pins} from './config'
   import {createEventDispatcher} from 'svelte'
 
   export let row: string[]
