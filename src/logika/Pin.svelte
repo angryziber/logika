@@ -10,12 +10,10 @@
   const click = () => dispatch('click')
 </script>
 
-<div class="pin" class:active>
-  <div class="inner" class:filled={!!color}
-       style="background: {color}; {draggable ? 'cursor: move' : ''}"
-       on:pointerdown={click} draggable={draggable}
-       on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault
-       {...$$restProps}>
+<div class="pin" class:active draggable={draggable} style={draggable ? 'cursor: move' : ''}
+     on:pointerdown={click}
+     on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault>
+  <div class="inner" class:filled={!!color} style="background: {color}" {...$$restProps}>
     {#if !color}{emptySymbol}{/if}
   </div>
 </div>
@@ -32,18 +30,19 @@
   .inner {
     font-size: 1.5rem;
     line-height: 1.4;
-    cursor: pointer;
     position: absolute;
     inset: 15%;
     border-radius: 50%;
     box-shadow: inset 5px 5px 10px rgba(0,0,0,0.3);
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
   }
 
   .inner.filled {
     box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3);
   }
 
-  .active .inner {
+  .active .inner, .inner:active {
     outline: 2px solid black;
     outline-offset: 2px;
   }
