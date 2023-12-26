@@ -1,7 +1,8 @@
 <script lang="ts">
-  import {colors, pins, rows} from './config'
-  import confetti from 'https://cdn.skypack.dev/canvas-confetti'
+  import {colors, pins, rows, type ScoreType} from './config'
   import Pin from './Pin.svelte'
+  import Score from './Score.svelte'
+  import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 
   let activeColor = ''
 
@@ -10,7 +11,7 @@
   let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
   let secretReveal = Array(pins).fill(false)
 
-  let rowScores = Array(rows).fill(undefined)
+  let rowScores: ScoreType[] = Array(rows).fill(undefined)
 
   function put(r: number, i: number) {
     board[r][i] = activeColor
@@ -76,12 +77,7 @@
             <button class="ready" on:click={() => calculateScore(r)}>✓</button>
           {/if}
           {#if score}
-            {#each Array(score.correctPosition).fill(0) as _}
-              <div class="score" style="color: black; cursor: help" title="One correct color and position">⬤</div>
-            {/each}
-            {#each Array(score.correctColor).fill(0) as _}
-              <div class="score" style="color: white; cursor: help" title="One correct color, but wrong position">⬤</div>
-            {/each}
+            <Score {score}/>
           {/if}
         </div>
       {/each}
@@ -120,13 +116,6 @@
   .scores {
     width: calc(5 * 1.5rem);
     border: 1px solid #ccc;
-  }
-
-  .score {
-    border-color: transparent;
-    font-size: 0.75rem;
-    width: 1.5rem;
-    line-height: 3rem;
   }
 
   button.ready {
