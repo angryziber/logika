@@ -59,8 +59,8 @@
 
   button {
     font-size: 1.5rem;
-    line-height: 0.5;
     width: 100%;
-    margin: 0.25rem;
+    height: 100%;
+    padding-left: 40%;
   }
 </style>
