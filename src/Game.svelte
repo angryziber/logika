@@ -47,49 +47,45 @@
   }
 </script>
 
-<main>
-  <h1>Logika / Mastermind</h1>
+<div class="game">
+  <div class="board">
+    <div class="row" style="margin-bottom: 2rem">
+      {#each secret as c, i}
+        <Pin color={secretReveal[i] ? c : ''} symbol={secretReveal[i] ? '⬤' : '?'}
+             on:pointerdown={() => secretReveal[i] = !secretReveal[i]}/>
+      {/each}
+    </div>
 
-  <div class="game">
-    <div class="board">
-      <div class="row" style="margin-bottom: 2rem">
-        {#each secret as c, i}
-          <Pin color={secretReveal[i] ? c : ''} symbol={secretReveal[i] ? '⬤' : '?'}
-               on:pointerdown={() => secretReveal[i] = !secretReveal[i]}/>
+    {#each board as rows, r}
+      <div class="row">
+        {#each rows as color, i}
+          <Pin {color} symbol={color ? '⬤' : '\u00a0'}
+               on:drop={() => put(r, i)}
+               on:pointerdown={() => put(r, i)}/>
         {/each}
       </div>
-
-      {#each board as rows, r}
-        <div class="row">
-          {#each rows as color, i}
-            <Pin {color} symbol={color ? '⬤' : '\u00a0'}
-                 on:drop={() => put(r, i)}
-                 on:pointerdown={() => put(r, i)}/>
-          {/each}
-        </div>
-      {/each}
-    </div>
-
-    <div class="scores">
-      {#each rowScores as score, r}
-        <div class="row">
-          {#if filled(board[r]) && !rowScores[r]}
-            <button class="ready" on:click={() => calculateScore(r)}>✓</button>
-          {/if}
-          {#if score}
-            <Score {score}/>
-          {/if}
-        </div>
-      {/each}
-    </div>
-  </div>
-
-  <div class="colors">
-    {#each colors as color}
-      <Pin {color} active={activeColor === color} on:pointerdown={() => activeColor = color} draggable/>
     {/each}
   </div>
-</main>
+
+  <div class="scores">
+    {#each rowScores as score, r}
+      <div class="row">
+        {#if filled(board[r]) && !rowScores[r]}
+          <button class="ready" on:click={() => calculateScore(r)}>✓</button>
+        {/if}
+        {#if score}
+          <Score {score}/>
+        {/if}
+      </div>
+    {/each}
+  </div>
+</div>
+
+<div class="colors">
+  {#each colors as color}
+    <Pin {color} active={activeColor === color} on:pointerdown={() => activeColor = color} draggable/>
+  {/each}
+</div>
 
 <style>
   .game {

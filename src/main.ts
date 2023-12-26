@@ -1,8 +1,6 @@
 import './global.css'
-import LogikaGame from './LogikaGame.svelte'
+import App from './App.svelte'
 
-const app = new LogikaGame({
+new App({
   target: document.getElementById('app')
 })
-
-export default app
