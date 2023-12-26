@@ -1,24 +1,11 @@
 ---
-import '../global.css'
+import Layout from '../layouts/Layout.astro'
 import Game from '../logika/Game.svelte'
 ---
 
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <link rel="manifest" href="/logika/manifest.json">
-    <link rel="icon" href="/logika/icon.png">
-    <meta name="viewport" content="width=430">
-    <title>Logika / Mastermind</title>
-  </head>
-  <body>
-    <main>
-      <h1>
-        <a href="https://github.com/angryziber/logika">Logika / Mastermind</a>
-      </h1>
-      <Game client:load/>
-    </main>
-  </body>
-</html>
-
+<Layout>
+  <h1>
+    <a href="https://github.com/angryziber/logika">Logika / Mastermind</a>
+  </h1>
+  <Game client:load/>
+</Layout>
