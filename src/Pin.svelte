@@ -10,11 +10,11 @@
   const click = () => dispatch('click')
 </script>
 
-<div class="pin" class:active
-     style={draggable ? 'cursor: move' : ''} draggable={draggable}
-     on:pointerdown={click}
-     on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault>
-  <div class="hole" class:filled={!!color} style="background: {color}">
+<div class="pin" class:active>
+  <div class="inner" class:filled={!!color}
+       style="background: {color}; {draggable ? 'cursor: move' : ''}"
+       on:pointerdown={click} draggable={draggable}
+       on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault>
     {#if !color}{emptySymbol}{/if}
   </div>
 </div>
@@ -25,20 +25,10 @@
     height: 3rem;
     width: 3rem;
     position: relative;
+    background: transparent;
   }
 
-  .pin:hover {
-    background: #cdcdcd;
-  }
-
-  .pin.active {
-    background: #ccc;
-    border-color: black;
-    position: relative;
-    z-index: 1;
-  }
-
-  .hole {
+  .inner {
     font-size: 1.5rem;
     line-height: 1.4;
     cursor: pointer;
@@ -49,7 +39,12 @@
     box-shadow: inset 5px 5px 10px rgba(0,0,0,0.3);
   }
 
-  .hole.filled {
+  .inner.filled {
     box-shadow: inset -5px -5px 10px rgba(0,0,0,0.3);
+  }
+
+  .active .inner {
+    outline: 2px solid black;
+    outline-offset: 2px;
   }
 </style>
