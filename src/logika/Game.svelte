@@ -1,6 +1,6 @@
 <script lang="ts">
   import {pins, rows} from '../config'
-  import confetti from 'https://cdn.skypack.dev/canvas-confetti'
+  // import confetti from 'https://cdn.skypack.dev/canvas-confetti'
   import Pin from './Pin.svelte'
   import Secret from './Secret.svelte'
   import Help from './Help.svelte'
@@ -16,7 +16,7 @@
 
   function won() {
     gameOver = true
-    confetti()
+    // TODO confetti()
   }
 </script>
 
