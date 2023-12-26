@@ -3,13 +3,12 @@
   import Pin from './Pin.svelte'
   import Score from './Score.svelte'
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
-
-  let activeColor = ''
+  import Secret from './Secret.svelte'
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
-
-  let secret = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
-  let secretReveal = Array(pins).fill(false)
+  let secret: string[]
+  let activeColor = ''
+  let gameOver = false
 
   let rowScores: ScoreType[] = Array(rows).fill(undefined)
 
@@ -42,7 +41,7 @@
     rowScores[r] = {correctPosition, correctColor}
     if (correctPosition == pins) {
       confetti()
-      secretReveal = secretReveal.fill(true)
+      gameOver = true
     }
   }
 </script>
@@ -50,10 +49,7 @@
 <div class="game">
   <div class="board">
     <div class="row" style="margin-bottom: 2rem">
-      {#each secret as c, i}
-        <Pin color={secretReveal[i] ? c : ''} emptySymbol="?"
-             on:click={() => secretReveal[i] = !secretReveal[i]}/>
-      {/each}
+      <Secret bind:secret reveal={gameOver}/>
     </div>
 
     {#each board as rows, r}
