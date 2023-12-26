@@ -80,10 +80,10 @@
           {/if}
           {#if score}
             {#each Array(score.correctPosition).fill(0) as _}
-              <div class="score" style="color: black" title="One correct color and position">⬤</div>
+              <div class="score" style="color: black; cursor: help" title="One correct color and position">⬤</div>
             {/each}
             {#each Array(score.correctColor).fill(0) as _}
-              <div class="score" style="color: white" title="One correct color, but wrong position">⬤</div>
+              <div class="score" style="color: white; cursor: help" title="One correct color, but wrong position">⬤</div>
             {/each}
           {/if}
         </div>
@@ -170,9 +170,5 @@
     flex-direction: row;
     flex-wrap: wrap;
     margin-top: 2rem;
-  }
-
-  @media screen and (max-device-width: 500px) {
-
   }
 </style>
