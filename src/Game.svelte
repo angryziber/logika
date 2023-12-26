@@ -6,6 +6,7 @@
   import ScoreCalculator from './ScoreCalculator.svelte'
   import ColorChoices from './ColorChoices.svelte'
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
+  import Help from './Help.svelte'
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
   let rowsCalculated: boolean[] = []
@@ -35,7 +36,8 @@
   </div>
 
   <div>
-    <div class="row mb">
+    <div class="row mb" style="gap: 1rem">
+      <Help/>
       <Reset/>
     </div>
 

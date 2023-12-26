@@ -39,6 +39,10 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+button.lg {
+  font-size: 2rem;
+  padding: 0.5rem 1rem;
+}
 button:hover {
   border-color: gray;
 }

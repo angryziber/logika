@@ -2,5 +2,15 @@
   import Game from './Game.svelte'
 </script>
 
-<h1>Logika / Mastermind</h1>
+<h1>
+  <a href="https://github.com/angryziber/logika">Logika / Mastermind</a>
+</h1>
+
 <Game/>
+
+<style>
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+</style>
