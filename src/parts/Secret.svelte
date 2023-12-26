@@ -1,5 +1,5 @@
 <script lang="ts">
-  import {colors, pins} from './config'
+  import {colors, pins} from '../config'
   import Pin from './Pin.svelte'
 
   export let secret: string[] = Array(pins).fill(0).map(() => colors[Math.ceil(Math.random() * colors.length) - 1])
