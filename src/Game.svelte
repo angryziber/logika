@@ -5,6 +5,7 @@
   import Reset from './Reset.svelte'
   import ScoreCalculator from './ScoreCalculator.svelte'
   import ColorChoices from './ColorChoices.svelte'
+  import confetti from 'https://cdn.skypack.dev/canvas-confetti'
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
   let secret: string[]
@@ -13,6 +14,11 @@
 
   function put(r: number, i: number) {
     board[r][i] = activeColor
+  }
+
+  function won() {
+    gameOver = true
+    confetti()
   }
 </script>
 
@@ -39,7 +45,7 @@
     <div class="scores">
       {#each board as row}
         <div class="row">
-          <ScoreCalculator {row} {secret} bind:gameOver/>
+          <ScoreCalculator {row} {secret} on:won={won}/>
         </div>
       {/each}
     </div>

@@ -1,15 +1,16 @@
 <script lang="ts">
   import Score from './Score.svelte'
   import {pins} from './config'
-  import confetti from 'https://cdn.skypack.dev/canvas-confetti'
+  import {createEventDispatcher} from 'svelte'
 
   export let row: string[]
   export let secret: string[]
-  export let gameOver = false
 
   let calculated = false
   let correctPosition = 0
   let correctColor = 0
+
+  const dispatch = createEventDispatcher<{won: void}>()
 
   function filled(row: string[]) {
     return row.every(p => p)
@@ -32,11 +33,9 @@
         tempSecret[j] = ''
       }
     })
-    if (correctPosition == pins) {
-      confetti()
-      gameOver = true
-    }
+
     calculated = true
+    if (correctPosition == pins) dispatch('won')
   }
 </script>
 
