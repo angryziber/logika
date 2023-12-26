@@ -1,11 +1,8 @@
 <script lang="ts">
+  import {colors, pins, rows} from './config'
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
   import Pin from './Pin.svelte'
 
-  const pins = 5
-  const rows = 12
-
-  const colors = ['black', 'white', 'deepskyblue', 'limegreen', '#8968e3', 'red', 'orange', 'yellow']
   let activeColor = ''
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
