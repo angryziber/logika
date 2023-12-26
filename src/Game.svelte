@@ -52,16 +52,14 @@
     <div class="row" style="margin-bottom: 2rem">
       {#each secret as c, i}
         <Pin color={secretReveal[i] ? c : ''} emptySymbol="?"
-             on:pointerdown={() => secretReveal[i] = !secretReveal[i]}/>
+             on:click={() => secretReveal[i] = !secretReveal[i]}/>
       {/each}
     </div>
 
     {#each board as rows, r}
       <div class="row">
         {#each rows as color, i}
-          <Pin {color}
-               on:drop={() => put(r, i)}
-               on:pointerdown={() => put(r, i)}/>
+          <Pin {color} on:click={() => put(r, i)}/>
         {/each}
       </div>
     {/each}
@@ -83,7 +81,7 @@
 
 <div class="colors">
   {#each colors as color}
-    <Pin {color} active={activeColor === color} on:pointerdown={() => activeColor = color} draggable/>
+    <Pin {color} active={activeColor === color} on:click={() => activeColor = color} draggable/>
   {/each}
 </div>
 

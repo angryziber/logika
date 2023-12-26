@@ -1,13 +1,19 @@
 <script lang="ts">
+  import {createEventDispatcher} from 'svelte'
+
   export let color: string
   export let emptySymbol = '\u00A0'
   export let active = false
   export let draggable = false
+
+  const dispatch = createEventDispatcher<{click: void}>()
+  const click = () => dispatch('click')
 </script>
 
 <div class="pin" class:active
      style="color: {color}; {draggable ? 'cursor: move' : ''}" draggable={draggable}
-     on:pointerdown on:dragenter|preventDefault on:dragover|preventDefault on:drop
+     on:pointerdown={click}
+     on:drop|stopPropagation={click} on:dragenter|preventDefault on:dragover|preventDefault
 >{color ? '⬤' : emptySymbol}</div>
 
 <style>
