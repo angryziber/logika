@@ -39,14 +39,24 @@
   }
 </script>
 
-{#if filled(row) && !calculated}
-  <button on:click={calculate}>✓</button>
-{/if}
-{#if calculated}
-  <Score {correctPosition} {correctColor}/>
-{/if}
+<div class="score-row">
+  {#if filled(row) && !calculated}
+    <button on:click={calculate}>✓</button>
+  {/if}
+  {#if calculated}
+    <Score {correctPosition} {correctColor}/>
+  {/if}
+</div>
 
 <style>
+  .score-row {
+    width: calc(5 * 1.5rem);
+    display: flex;
+    place-items: center;
+    gap: 0.5rem;
+    margin-left: 0.5rem;
+  }
+
   button {
     font-size: 1.5rem;
     line-height: 0.5;

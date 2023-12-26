@@ -34,7 +34,6 @@
     cursor: pointer;
     position: absolute;
     inset: 15%;
-    border: 1px solid gray;
     border-radius: 50%;
     box-shadow: inset 5px 5px 10px rgba(0,0,0,0.3);
   }

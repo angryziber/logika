@@ -8,18 +8,20 @@
 </script>
 
 {#each Array(correctPosition).fill(0) as _}
-  <div class="score" style="color: black" title="Blak: one correct color and position" on:click={showTitle}>⬤</div>
+  <div class="pin" style="background: #555"
+       title="Black: one correct color and position" on:click={showTitle}/>
 {/each}
 {#each Array(correctColor).fill(0) as _}
-  <div class="score" style="color: white" title="White: one correct color, but wrong position" on:click={showTitle}>⬤</div>
+  <div class="pin" style="background: white"
+       title="White: one correct color, but wrong position" on:click={showTitle}/>
 {/each}
 
 <style>
-  .score {
-    border-color: transparent;
-    font-size: 0.75rem;
-    width: 1.5rem;
-    line-height: 3rem;
+  .pin {
+    width: 1rem;
+    height: 1rem;
     cursor: help;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 6px rgba(0,0,0,0.3);
   }
 </style>

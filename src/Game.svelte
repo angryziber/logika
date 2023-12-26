@@ -68,12 +68,12 @@
     height: 3rem;
   }
 
-  .row.mb {
+  .mb {
     margin-bottom: 2rem;
   }
 
   .scores {
-    width: calc(5 * 1.5rem);
     border: 1px solid #ccc;
+    border-radius: 0.5rem;
   }
 </style>
