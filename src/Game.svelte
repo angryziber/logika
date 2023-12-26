@@ -1,9 +1,10 @@
 <script lang="ts">
-  import {colors, pins, rows} from './config'
+  import {pins, rows} from './config'
   import Pin from './Pin.svelte'
   import Secret from './Secret.svelte'
   import Reset from './Reset.svelte'
   import ScoreCalculator from './ScoreCalculator.svelte'
+  import ColorChoices from './ColorChoices.svelte'
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
   let secret: string[]
@@ -45,11 +46,7 @@
   </div>
 </div>
 
-<div class="colors">
-  {#each colors as color}
-    <Pin {color} active={activeColor === color} on:click={() => activeColor = color} draggable/>
-  {/each}
-</div>
+<ColorChoices bind:activeColor/>
 
 <style>
   .game {
@@ -76,12 +73,5 @@
   .scores {
     width: calc(5 * 1.5rem);
     border: 1px solid #ccc;
-  }
-
-  .colors {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-top: 2rem;
   }
 </style>
