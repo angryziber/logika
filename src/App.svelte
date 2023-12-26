@@ -52,14 +52,6 @@
   <h1>Logika / Mastermind</h1>
 
   <div class="game">
-    <div class="colors">
-      {#each colors as color}
-        <div class="pin" class:active={activeColor == color}
-             style="color: {color}"
-             on:click={() => activeColor = color}>⬤</div>
-      {/each}
-    </div>
-
     <div class="board">
       <div class="row" style="margin-bottom: 2rem">
         {#each secret as c, i}
@@ -93,12 +85,18 @@
             {#each Array(score.correctColor).fill(0) as _}
               <div class="score" style="color: white" title="One correct color, but wrong position">⬤</div>
             {/each}
-          {:else}
-            <div class="score"/>
           {/if}
         </div>
       {/each}
     </div>
+  </div>
+
+  <div class="colors">
+    {#each colors as color}
+      <div class="pin" class:active={activeColor == color}
+           style="color: {color}"
+           on:click={() => activeColor = color}>⬤</div>
+    {/each}
   </div>
 </main>
 
@@ -106,7 +104,6 @@
   .game {
     display: flex;
     gap: 2rem;
-    user-select: none;
   }
 
   .board {
@@ -115,8 +112,8 @@
     align-items: center;
   }
 
-  .colors, .scores {
-    padding-top: 5rem;
+  .scores {
+    margin-top: 5rem;
   }
 
   .row {
@@ -126,10 +123,13 @@
   }
 
   .pin {
+    user-select: none;
     border: 1px solid #ccc;
     margin: -1px 0 0 -1px;
     width: 3rem;
-    line-height: 3rem;
+    line-height: 2.8rem;
+    padding-bottom: 0.2rem;
+    font-size: 1.5rem;
   }
 
   .pin:hover {
@@ -146,6 +146,7 @@
 
   .scores {
     width: calc(5 * 1.5rem);
+    border: 1px solid #ccc;
   }
 
   .score {
@@ -160,5 +161,18 @@
     color: white;
     font-size: 1.5rem;
     line-height: 0.5;
+    width: 100%;
+    margin: 0.25rem;
+  }
+
+  .colors {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  @media screen and (max-device-width: 500px) {
+
   }
 </style>
