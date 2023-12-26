@@ -1,4 +1,4 @@
-import './app.css'
+import './global.css'
 import LogikaGame from './LogikaGame.svelte'
 
 const app = new LogikaGame({
