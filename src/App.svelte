@@ -68,7 +68,8 @@
             <div class="pin" style="color: {c}"
                  on:dragenter|preventDefault on:dragover|preventDefault
                  on:drop|stopPropagation={() => put(r, i)}
-                 on:click={() => put(r, i)}>{c ? '⬤' : '\u00a0'}</div>
+                 on:mousedown={() => put(r, i)}
+            >{c ? '⬤' : '\u00a0'}</div>
           {/each}
         </div>
       {/each}
@@ -98,7 +99,8 @@
       <div class="pin" class:active={activeColor == color}
            style="color: {color}; cursor: move" draggable="true"
            on:dragstart={() => activeColor = color}
-           on:click={() => activeColor = color}>⬤</div>
+           on:mousedown={() => activeColor = color}
+      >⬤</div>
     {/each}
   </div>
 </main>
