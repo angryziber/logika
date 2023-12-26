@@ -1,12 +1,12 @@
 <script lang="ts">
-  import {pins, rows} from './config'
+  import {pins, rows} from '../config'
   import confetti from 'https://cdn.skypack.dev/canvas-confetti'
-  import Pin from './parts/Pin.svelte'
-  import Secret from './parts/Secret.svelte'
-  import Help from './parts/Help.svelte'
-  import Reset from './parts/Reset.svelte'
-  import ScoreCalculator from './parts/ScoreCalculator.svelte'
-  import ColorChoices from './parts/ColorChoices.svelte'
+  import Pin from './Pin.svelte'
+  import Secret from './Secret.svelte'
+  import Help from './Help.svelte'
+  import Reset from './Reset.svelte'
+  import ScoreCalculator from './ScoreCalculator.svelte'
+  import ColorChoices from './ColorChoices.svelte'
 
   let board = Array(rows).fill(0).map(() => Array(pins).fill(''))
   let rowsCalculated: boolean[] = []
