@@ -1,7 +1,7 @@
 import './app.css'
-import App from './App.svelte'
+import LogikaGame from './LogikaGame.svelte'
 
-const app = new App({
+const app = new LogikaGame({
   target: document.getElementById('app')
 })
 
