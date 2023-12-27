@@ -1,6 +1,6 @@
 # Logika / Mastermind game
 
-[See it in action](https://keks.ee/logika/)
+[Play now / See it in action](https://keks.ee/logika/)
 
 An old Soviet board-game Logika (similar to international [Mastermind](https://en.wikipedia.org/wiki/Mastermind_(board_game))).
 
@@ -11,6 +11,8 @@ Rules:
   * Black: some guessed color is at the correct position
   * White: some guessed color exists, but at different position
 * Repeat until you know the correct secret (5 blacks)!
+
+[![Logika board-game](boardgame.jpg)](https://habr.com/ru/articles/599669/)
 
 Implemented in [Svelte](https://svelte.dev/).
 
