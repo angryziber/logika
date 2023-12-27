@@ -12,35 +12,29 @@
 
   const dispatch = createEventDispatcher<{won: void}>()
 
-  function filled(row: string[]) {
-    return row.every(p => p)
-  }
-
   function calculate() {
-    const tempRow = [...row]
-    const tempSecret = [...secret]
-    secret.forEach((c, i) => {
-      if (tempRow[i] == c) {
+    const visited = new Set()
+    row.forEach((c, i) => {
+      if (c == secret[i]) {
         correctPosition++
-        tempSecret[i] = 'x'
-        tempRow[i] = 'y'
+        visited.add(i)
       }
     })
-    tempRow.forEach((c, i) => {
-      const j = tempSecret.indexOf(tempRow[i])
-      if (j >= 0) {
+    row.forEach((c, i) => {
+      if (visited.has(i)) return
+      const j = secret.indexOf(c)
+      if (j >= 0 && !visited.has(j)) {
         correctColor++
-        tempSecret[j] = ''
+        visited.add(j)
       }
     })
-
     calculated = true
     if (correctPosition == pins) dispatch('won')
   }
 </script>
 
-<div class="score-row">
-  {#if filled(row) && !calculated}
+<div class="score-row" style="width: {pins * 1.5}rem">
+  {#if row.every(p => p) && !calculated}
     <button on:click={calculate}>✓</button>
   {/if}
   {#if calculated}
@@ -50,7 +44,6 @@
 
 <style>
   .score-row {
-    width: calc(5 * 1.5rem);
     display: flex;
     place-items: center;
     gap: 0.5rem;
