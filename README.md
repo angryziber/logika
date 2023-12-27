@@ -12,4 +12,8 @@ Rules:
   * White: some guessed color exists, but at different position
 * Repeat until you know the correct secret (5 blacks)!
 
-A basic example [Svelte](https://svelte.dev/).
+Implemented in [Svelte](https://svelte.dev/).
+
+Works on Desktop, Mobile devices (installable as an app) and even Tesla.
+
+Web technologies rule for portability!
