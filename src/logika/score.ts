@@ -1,7 +1,7 @@
 export function calculateScore(row: string[], secret: string[]) {
   const result = {correctPosition: 0, correctColor: 0}
   const _row = [...row], _secret = [...secret]
-  row.forEach((c, i) => {
+  _row.forEach((c, i) => {
     if (c == _secret[i]) {
       result.correctPosition++
       _secret[i] = ''
