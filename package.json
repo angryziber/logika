@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
-    "test": "node --loader tsx --test src/**/*.test.ts",
+    "test": "tsx --test src/**/*.test.ts",
     "build": "vite build",
     "preview": "vite preview"
   },
