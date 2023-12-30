@@ -14,6 +14,7 @@ test('one position', () => {
 
 test('one color', () => {
   assert.deepEqual(calculateScore(['2', '1'], ['1', '3']), {correctPosition: 0, correctColor: 1})
+  assert.deepEqual(calculateScore(['2', '1', '1', '1'], ['1', '3', '4', '5']), {correctPosition: 0, correctColor: 1})
 })
 
 test('with duplicates', () => {
