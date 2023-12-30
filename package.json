@@ -1,16 +1,21 @@
 {
   "name": "logika",
+  "engines": {
+    "node": "20+"
+  },
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "test": "node --loader tsx --test src/**/*.test.ts",
     "build": "vite build",
     "preview": "vite preview"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^3.0.1",
     "svelte": "^4.2.8",
+    "tsx": "^4.7.0",
     "vite": "^5.0.8"
   }
 }
